@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="privacy_unified_entry">true</bool>
+    <string name="privacy_entry_title">隐私条款</string>
+    <string name="privacy_entry_content">在您使用我们的服务前，请您务必审慎阅读、充分理解[href=0]《用户协议》[/href]、[href=1]《隐私政策》[/href]和[href=2]《儿童隐私保护指南》[/href]各条款。同时，您应当特别注意前述协议中免除或者减轻责任的条款、对您权力进行限制的条款、争议解决和司法管辖的条款。如您已经详细阅读并接受前述协议，请点击“同意”开始使用我们的服务。如您拒绝，将无法进入游戏。</string>
+    <string name="privacy_agree_jump">com.timeyears.activity.TimeYearsUnityActivity</string>
+
+    <string-array name="privacy_title_arr">
+        <item>《用户协议》</item>
+        <item>《隐私政策》</item>
+        <item>《儿童隐私保护》</item>
+    </string-array>
+    <string-array name="privacy_content_arr">
+        <item>user.html</item>
+        <item>privacy.html</item>
+        <item>child.html</item>
+    </string-array>
+</resources>
