@@ -1,0 +1,3 @@
+新增：
+       boolean startActivity(Context context, String url)   //用url来启动activity
+       boolean startActivity(Context context, String url, String mimeType) //用url来启动activity  同时配置mimeType
