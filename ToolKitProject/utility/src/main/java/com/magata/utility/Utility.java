@@ -49,7 +49,7 @@ public class Utility {
      * @return 返回true表示呼起界面成功，返回false表示呼起失败
 
      ******************/
-    public boolean startActivity(Context context, String url) {
+    public static boolean startActivity(Context context, String url) {
         Intent intent = new Intent();
         intent.setData(Uri.parse(url));
         try {
@@ -69,7 +69,7 @@ public class Utility {
      * @return 返回true表示呼起界面成功，返回false表示呼起失败
 
      ******************/
-    public boolean startActivity(Context context, String url, String mimeType) {
+    public static boolean startActivity(Context context, String url, String mimeType) {
         Intent intent = new Intent();
         intent.setDataAndType(Uri.parse(url), mimeType);
         try {

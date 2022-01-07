@@ -1,0 +1,3 @@
+ÐÞ¸Ä£º
+       ÒþË½Õþ²ßActivity margin left right 25dp
+       screenOrientation = behind

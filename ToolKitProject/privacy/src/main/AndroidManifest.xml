@@ -6,10 +6,12 @@
         <activity
             android:name=".PrivacyContentActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="behind"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".PrivacyActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="behind"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
         <activity
