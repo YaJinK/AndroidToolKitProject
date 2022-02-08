@@ -1,0 +1,11 @@
+include ':app'
+include ':event-listeners'
+include ':file-provider'
+include ':opensdk'
+include ':privacy'
+include ':unity-event-listeners'
+include ':utility'
+include ':wechat'
+
+include ':unity'
+include ':update'

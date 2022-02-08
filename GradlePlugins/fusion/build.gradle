@@ -1,0 +1,30 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'groovy'
+}
+apply from: "../../publish.gradle"
+
+//gradlePlugin {
+//    plugins {
+//        fusion {
+//            id = 'com.magata.fusion'
+//            implementationClass = 'com.magata.fusion.FusionPlugin'
+//        }
+//    }
+//}
+
+repositories {
+    maven{ url 'https://maven.aliyun.com/repository/public'}
+    maven{ url 'https://maven.aliyun.com/repository/google'}
+}
+
+
+dependencies {
+    implementation fileTree("libs")
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+//build.shouldRunAfter fusion
+//build.dependsOn fusion
+

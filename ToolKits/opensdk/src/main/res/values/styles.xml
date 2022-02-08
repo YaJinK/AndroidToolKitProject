@@ -1,0 +1,5 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="Assist_Style" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+</resources>

@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+apply from: "../../publish.gradle"
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(path: ':file-provider')
+    implementation project(path: ':utility')
+    testImplementation 'junit:junit:4.13.2'
+    implementation project(path: ':event-listeners')
+    implementation files('libs/wechat-sdk-android-6.8.0.jar')
+}

@@ -1,0 +1,49 @@
+apply plugin:'maven-publish'
+
+publishing {
+    publications {
+        aar(MavenPublication) {
+            groupId = GROUP_ID
+            artifactId = ARTIFACTID
+            version = LIBRARY_VERSION
+
+            artifact file("build/outputs/aar/$ARTIFACTID-release.aar")
+        }
+        javaJar(MavenPublication) {
+            groupId = GROUP_ID
+            artifactId = ARTIFACTID
+            version = LIBRARY_VERSION
+            artifact file("build/libs/$ARTIFACTID" + ".jar")
+        }
+    }
+    // 发布仓库
+    repositories {
+        maven {
+            // 凭证
+            credentials {
+                username USER_NAME // 仓库发布用户名
+                password USER_PASSWORD // 仓库发布用户密码
+            }
+            // 地址
+            url REPO_URL
+        }
+    }
+}
+
+
+task uploadToMavenAar {
+    setGroup('publishing')
+}
+publishAarPublicationToMavenRepository.shouldRunAfter build
+publishAarPublicationToMavenRepository.dependsOn build
+uploadToMavenAar.shouldRunAfter publishAarPublicationToMavenRepository
+uploadToMavenAar.dependsOn publishAarPublicationToMavenRepository
+
+task uploadToMavenJavaJar {
+    setGroup('publishing')
+}
+
+publishJavaJarPublicationToMavenRepository.shouldRunAfter build
+publishJavaJarPublicationToMavenRepository.dependsOn build
+uploadToMavenJavaJar.shouldRunAfter publishJavaJarPublicationToMavenRepository
+uploadToMavenJavaJar.dependsOn publishJavaJarPublicationToMavenRepository
