@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven {
-            url REPO_URL
+            url "http://192.168.1.50:8081/repository/maven-fusion/"
         }
     }
     dependencies {
@@ -29,7 +29,7 @@ android {
 
     defaultConfig {
         applicationId "com.magata.toolkits"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -40,35 +40,40 @@ android {
             debuggable false
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
 dependencies {
-//    implementation 'com.magata.toolkits:privacy:1.0.0'
+//    implementation project(path: ':net')
     testImplementation 'junit:junit:4.13.2'
 }
 
 apply plugin: 'com.magata.fusion'
 
 Fusion {
-    Tencent {
+    appId = "8"
+
+    HuaWei {
         enabled = true
-        appId = "5555"
+        appId = "1"
+        cpId = "2"
     }
-//    WeChat {
-//        enabled = false
-//        appId = "4444"
-//    }
-//    Privacy {
-//        enabled = true
-//        htmlUrl = "https://cdn-10019666.cos.ap-shanghai.myqcloud.com/common/le4"
-//        title = "隐私政策"
-//        content = "在您使用我们的服务前，请您务必审慎阅读、充分理解[href=0]《用户协议》[/href]、[href=1]《隐私政策》[/href]和[href=2]《儿童隐私保护指南》[/href]各条款。同时，您应当特别注意前述协议中免除或者减轻责任的条款、对您权力进行限制的条款、争议解决和司法管辖的条款。如您已经详细阅读并接受前述协议，请点击“同意”开始使用我们的服务。如您拒绝，将无法进入游戏。"
-//        jump = "com.timeyears.activity.111"
-//        subTitleArray = ["用户协议", "隐私政策", "儿童隐私保护指南"]
-//        subContentHtmlArray = ["user.html", "privacy.html", "child.html"]
-//        screenOrientation = 1
-//    }
+
+
+    Privacy {
+        enabled = true
+        htmlUrl = "https://cdn-10019666.cos.ap-shanghai.myqcloud.com/common/le4"
+        title = "隐私政策"
+        content = "在您使用我们的服务前，请您务必审慎阅读、充分理解[href=0]《用户协议》[/href]、[href=1]《隐私政策》[/href]和[href=2]《儿童隐私保护指南》[/href]各条款。同时，您应当特别注意前述协议中免除或者减轻责任的条款、对您权力进行限制的条款、争议解决和司法管辖的条款。如您已经详细阅读并接受前述协议，请点击“同意”开始使用我们的服务。如您拒绝，将无法进入游戏。"
+        jump = "com.timeyears.activity.111"
+        subTitleArray = ["用户协议", "隐私政策", "儿童隐私保护指南"]
+        subContentHtmlArray = ["user.html", "privacy.html", "child.html"]
+        screenOrientation = 1
+    }
 }
 apply plugin: 'com.magata.fusion.finish'
 

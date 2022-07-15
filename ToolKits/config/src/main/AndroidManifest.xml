@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.magata.config">
+    <application
+        android:label="@string/app_name" >
+        <meta-data
+            android:name="com.magata.appid"
+            android:value="${magataAppId}">
+        </meta-data>
+    </application>
+</manifest>

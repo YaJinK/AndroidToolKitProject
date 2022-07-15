@@ -3,7 +3,6 @@ package com.magata.privacy;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;

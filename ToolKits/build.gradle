@@ -17,9 +17,8 @@ allprojects {
         google()
         jcenter()
         maven {
-            url REPO_URL
+            url "http://192.168.1.50:8081/repository/maven-fusion/"
         }
-
     }
 }
 

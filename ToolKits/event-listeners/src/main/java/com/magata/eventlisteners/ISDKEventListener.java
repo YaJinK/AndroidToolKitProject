@@ -20,8 +20,8 @@ public interface ISDKEventListener {
     void onPayFailed(String data);
     void onPayCanceled();
 
-    void onPushTokenGetSucceed(String data);
-    void onPushTokenGetFailed(String data);
+    void onPushDataGetSucceed(String data);
+    void onPushDataGetFailed(String data);
 
     void onSubmitUserInfoSucceed();
     void onSubmitUserInfoFailed(String data);

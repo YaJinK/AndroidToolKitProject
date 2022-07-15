@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':config')
 
     testImplementation 'junit:junit:4.13.2'
     implementation project(path: ':utility')

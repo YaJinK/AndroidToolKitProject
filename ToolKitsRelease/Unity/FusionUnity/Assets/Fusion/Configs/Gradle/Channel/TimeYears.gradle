@@ -1,0 +1,28 @@
+apply plugin: 'com.magata.fusion'
+
+Fusion {
+    appId = "60"
+
+    Tencent {
+        enabled = true
+        appId = "101988285"
+    }
+    WeChat {
+        enabled = true
+        appId = "wx43d62c17fdde1242"
+    }
+    Alipay {
+        enabled = true
+    }
+    Privacy {
+        enabled = true
+        htmlUrl = "https://cdn-10019666.cos.ap-shanghai.myqcloud.com/common/le4"
+        title = "隐私政策"
+        content = "在您使用我们的服务前，请您务必审慎阅读、充分理解[href=0]《用户协议》[/href]、[href=1]《隐私政策》[/href]和[href=2]《儿童隐私保护指南》[/href]各条款。同时，您应当特别注意前述协议中免除或者减轻责任的条款、对您权力进行限制的条款、争议解决和司法管辖的条款。如您已经详细阅读并接受前述协议，请点击“同意”开始使用我们的服务。如您拒绝，将无法进入游戏。"
+        jump = "com.timeyears.activity.TimeYearsUnityActivity"
+        subTitleArray = ["用户协议", "隐私政策", "儿童隐私保护指南"]
+        subContentHtmlArray = ["user.html", "privacy.html", "child.html"]
+        screenOrientation = 1
+    }
+}
+apply plugin: 'com.magata.fusion.finish'

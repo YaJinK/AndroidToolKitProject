@@ -1,16 +1,25 @@
 package com.magata.utility;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.DisplayCutout;
+import android.view.View;
+import android.view.WindowInsets;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.UUID;
 
 public class Utility {
 
@@ -144,4 +153,121 @@ public class Utility {
         }
         return value;
     }
+
+    public static String getAndroidId(Context context) {
+        return Settings.System.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
+
+    public static String getUUID() {
+        return UUID.randomUUID().toString();
+    }
+
+    public static int getNotchHeight(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            final View decorView = activity.getWindow().getDecorView();
+            WindowInsets rootWindowInsets = decorView.getRootWindowInsets();
+            DisplayCutout displayCutout = rootWindowInsets.getDisplayCutout();
+            return displayCutout != null ? displayCutout.getSafeInsetTop() : 115;
+        } else {
+            return 115;
+        }
+    }
+
+    private static boolean checkIsNotch(Activity context, String brand) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            final View decorView = context.getWindow().getDecorView();
+            WindowInsets rootWindowInsets = decorView.getRootWindowInsets();
+            DisplayCutout displayCutout = rootWindowInsets.getDisplayCutout();
+            if (displayCutout == null) {
+                return false;
+            } else {
+                List<Rect> rects = displayCutout.getBoundingRects();
+
+                if (rects == null || rects.size() == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } else {
+            if ("huawei".equals(brand)) {
+                boolean ret = false;
+                try {
+                    ClassLoader cl = context.getClassLoader();
+                    Class HwNotchSizeUtil = cl.loadClass("com.huawei.android.util.HwNotchSizeUtil");
+                    Method get = HwNotchSizeUtil.getMethod("hasNotchInScreen");
+                    ret = (boolean) get.invoke(HwNotchSizeUtil);
+                } catch (ClassNotFoundException e) {
+                    Log.e("checkIsNotch", "huawei ClassNotFoundException");
+                } catch (NoSuchMethodException e) {
+                    Log.e("checkIsNotch", "huawei NoSuchMethodException");
+                } catch (Exception e) {
+                    Log.e("checkIsNotch", "huawei Exception");
+                } finally {
+                    Log.d("checkIsNotch", "" + ret);
+                    return ret;
+                }
+            } else if ("xiaomi".equals(brand)) {
+                boolean ret = false;
+                try {
+                    ClassLoader cl = context.getClassLoader();
+                    Class cls = cl.loadClass("android.os.SystemProperties");
+                    Method method = cls.getMethod("getInt", String.class, int.class);
+                    ret = ((int) method.invoke(null, "ro.miui.notch", 0) == 1);
+                } catch (ClassNotFoundException e) {
+                    Log.e("checkIsNotch", "xiaomi ClassNotFoundException");
+                } catch (NoSuchMethodException e) {
+                    Log.e("checkIsNotch", "xiaomi NoSuchMethodException");
+                } catch (Exception e) {
+                    Log.e("checkIsNotch", "xiaomi Exception");
+                } finally {
+                    Log.d("checkIsNotch", "" + ret);
+                    return ret;
+                }
+            } else if ("vivo".equals(brand)) {
+                boolean ret = false;
+                try {
+                    ClassLoader cl = context.getClassLoader();
+                    Class cls = cl.loadClass("android.util.FtFeature");
+                    Method method = cls.getMethod("isFeatureSupport", int.class);
+                    ret = (boolean) method.invoke(cls, 0x00000020);
+                } catch (ClassNotFoundException e) {
+                    Log.e("checkIsNotch", "vivo ClassNotFoundException");
+                } catch (NoSuchMethodException e) {
+                    Log.e("checkIsNotch", "vivo NoSuchMethodException");
+                } catch (Exception e) {
+                    Log.e("checkIsNotch", "vivo Exception");
+                } finally {
+                    Log.d("checkIsNotch", "" + ret);
+                    return ret;
+                }
+            } else if ("oppo".equals(brand)) {
+                boolean ret = false;
+                try {
+                    ret = context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+                } catch (Exception e) {
+                    Log.e("checkIsNotch", "oppo Exception");
+                    e.printStackTrace();
+                } finally {
+                    Log.d("checkIsNotch", "" + ret);
+                    return ret;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public static boolean checkIsNotch(Activity context) {
+        boolean huaweiIsNotch = checkIsNotch(context, "huawei");
+        boolean xiaomiIsNotch = checkIsNotch(context, "xiaomi");
+        boolean vivoIsNotch = checkIsNotch(context, "vivo");
+        boolean oppoIsNotch = checkIsNotch(context, "oppo");
+
+        boolean result = huaweiIsNotch || xiaomiIsNotch || vivoIsNotch || oppoIsNotch;
+        Log.d("checkIsNotch", "ResultAll: " + result);
+        return result;
+    }
+
 }
